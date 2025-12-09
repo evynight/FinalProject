@@ -1,4 +1,4 @@
-public class Game
+public class DungeonQuest
 {
     /**
     *   Project Checklist
