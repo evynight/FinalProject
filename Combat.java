@@ -2,21 +2,16 @@ import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*;
+import java.util.Queue;
 
-public class GUI extends JFrame implements ActionListener
+public class Combat
+    implements Encounter, ActionListener
 {
-    private final int GAME_WIDTH = 550;
-    private final int GAME_HEIGHT = 365;
-
-    JMenuBar bar = new JMenuBar();
-    JMenu gameMenu = new JMenu("Game");
-    JMenu aboutMenu = new JMenu("About");
-    JMenuItem newGame = new JMenuItem("New Game");
-    JMenuItem saveGame = new JMenuItem("Save");
-    JMenuItem loadGame = new JMenuItem("Load");
-    JMenuItem exitGame = new JMenuItem("Exit");
-    JMenuItem playInfo = new JMenuItem("How to Play");
-    JMenuItem credits = new JMenuItem("Credits");
+    private final int COMBAT_WIDTH = 350;
+    private final int COMBAT_HEIGHT = 350;
+    private Dimension combatDim = new Dimension(COMBAT_WIDTH, COMBAT_HEIGHT);
+    JFrame frame = new JFrame("Fight!");
 
     private final int PLAY_WIDTH = 375;
     private final int PLAY_HEIGHT = 350;
@@ -27,9 +22,9 @@ public class GUI extends JFrame implements ActionListener
     JScrollPane textPane = new JScrollPane(textBox,
         JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
         JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-    JLabel titleLabel = new JLabel("Dungeon Quest");
-    JButton startButton = new JButton("Start");
-    JButton nextButton = new JButton("Next");
+    JButton attack = new JButton("Attack");
+    JButton defend = new JButton("Defend");
+    JButton special = new JButton("Special");
 
     private final int STAT_WIDTH = 120;
     private final int STAT_HEIGHT = 60;
@@ -46,27 +41,33 @@ public class GUI extends JFrame implements ActionListener
 
     Border blkBrdr = BorderFactory.createLineBorder(Color.black);
 
-    public GUI()
+    private Boolean multiMon;
+    Player player;
+    Monster mon1;
+    Monster mon2;
+    Queue<Character> turns = new LinkedList<Character>();
+
+    public Combat(Player p, Monster m1)
     {
-        super("Dungeon Quest");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(GAME_WIDTH, GAME_HEIGHT);
-        setResizable(false);
+        player = p;
+        mon1 = m1;
+        multiMon = false;
+    }
+    public Combat(Player p, Monster m1, Monster m2)
+    {
+        player = p;
+        mon1 = m1;
+        mon2 = m2;
+        multiMon = true;
+    }
+    @Override
+    public void initiate()
+    {
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.setSize(combatDim);
+        frame.setResizable(false);
 
-        setJMenuBar(bar);
-        bar.add(gameMenu);
-            gameMenu.add(newGame);
-            gameMenu.addSeparator();
-            gameMenu.add(saveGame);
-            gameMenu.add(loadGame);
-            gameMenu.addSeparator();
-            gameMenu.add(exitGame);
-        bar.add(aboutMenu);
-            aboutMenu.add(playInfo);
-            aboutMenu.addSeparator();
-            aboutMenu.add(credits);
-
-        add(playPane, BorderLayout.CENTER);
+        frame.add(playPane, BorderLayout.CENTER);
         playPane.setPreferredSize(playDim);
         playPane.setMaximumSize(playDim);
         playPane.add(textPane, BorderLayout.CENTER);
@@ -75,10 +76,11 @@ public class GUI extends JFrame implements ActionListener
             textBox.setEditable(false);
             textBox.setFocusable(false);
         playPane.add(controlPane, BorderLayout.PAGE_END);
-            controlPane.add(startButton);
-            controlPane.add(nextButton);
+            controlPane.add(attack);
+            controlPane.add(defend);
+            controlPane.add(special);
 
-        add(statPane, BorderLayout.LINE_START);
+        frame.add(statPane, BorderLayout.LINE_START);
         statPane.setLayout(new BoxLayout(statPane, BoxLayout.Y_AXIS));
         statPane.setBorder(BorderFactory.createTitledBorder(blkBrdr, "Stats"));
         statPane.add(namePane);
@@ -102,58 +104,49 @@ public class GUI extends JFrame implements ActionListener
             hitPane.setBorder(BorderFactory.createTitledBorder(blkBrdr, "HP",
                 TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
         
-        //pack();
-        setLocationRelativeTo(null);
+        frame.setLocationRelativeTo(frame.getRootPane());
+        frame.setVisible(true);
 
-        newGame.addActionListener(this);
-        saveGame.addActionListener(this);
-        loadGame.addActionListener(this);
-        exitGame.addActionListener(this);
-        playInfo.addActionListener(this);
-        credits.addActionListener(this);
-        startButton.addActionListener(this);
-        nextButton.addActionListener(this);
+        attack.addActionListener(this);
+        defend.addActionListener(this);
+        special.addActionListener(this);
+
+        if (!multiMon) 
+        {
+            addTxt("Encountered " + mon1.getName() + "!");
+        }
+        else
+        {
+            addTxt("Encountered " + mon1.getName() + " and " + mon2.getName() + "!");
+        }
+    }
+    @Override
+    public void addTxt(String s)
+    {
+        textBox.append(s + "\n");
+    }
+    @Override
+    public void wrapUp()
+    {
+        System.out.println("All monsters defeated!");
+        frame.dispose();
     }
     @Override
     public void actionPerformed(ActionEvent a)
     {
         Object source = a.getSource();
 
-        if(source == newGame)
+        if (source == attack)
         {
-            System.out.println("New Game clicked");
+            System.out.println("Attack button pressed");
         }
-        if(source == saveGame)
+        if (source == defend)
         {
-            System.out.println("Save clicked");
+            System.out.println("Defend button pressed");
         }
-        if(source == loadGame)
+        if (source == special)
         {
-            System.out.println("Load clicked");
+            System.out.println("Special button pressed");
         }
-        if(source == exitGame)
-        {
-            System.out.println("Exit clicked");
-        }
-        if(source == playInfo)
-        {
-            System.out.println("How to Play clicked");
-        }
-        if(source == credits)
-        {
-            System.out.println("Credits clicked");
-        }
-        if(source == startButton)
-        {
-            System.out.println("Start button pressed");
-        }
-        if(source == nextButton)
-        {
-            System.out.println("Next button pressed");
-        }
-    }
-    public static void addTxt(String s)
-    {
-        textBox.append(s + "\n");
     }
 }
