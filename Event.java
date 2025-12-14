@@ -1,3 +1,4 @@
+//Second child class of Encoounter interface
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;

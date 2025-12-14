@@ -1,3 +1,4 @@
+//First child of Character class
 public class Player extends Character
 {
     private int lvl;

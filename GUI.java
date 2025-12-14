@@ -21,7 +21,7 @@ public class GUI extends JFrame implements ActionListener
     private final int PLAY_WIDTH = 375;
     private final int PLAY_HEIGHT = 350;
     private Dimension playDim = new Dimension(PLAY_WIDTH, PLAY_HEIGHT);
-    JPanel playPane = new JPanel();
+    JPanel playPane = new JPanel();//Making a BorderLayhout manager with the default constructor
     JPanel controlPane = new JPanel(new FlowLayout(FlowLayout.CENTER));
     static JTextArea textBox = new JTextArea(15, 35);
     JScrollPane textPane = new JScrollPane(textBox,
@@ -30,11 +30,11 @@ public class GUI extends JFrame implements ActionListener
     JLabel titleLabel = new JLabel("Dungeon Quest");
     JButton startButton = new JButton("Start");
     JButton nextButton = new JButton("Next");
-
-    private final int STAT_WIDTH = 120;
+    
+    private final int STAT_WIDTH = 120;//I made no shortage of JFrame elements in both 
     private final int STAT_HEIGHT = 60;
     private Dimension statDim = new Dimension(STAT_WIDTH, STAT_HEIGHT);
-    JPanel statPane = new JPanel();
+    JPanel statPane = new JPanel();//A few simple uses of a FlowLayout manager
     JPanel namePane = new JPanel(new FlowLayout(FlowLayout.CENTER));
     JPanel lvlPane = new JPanel(new FlowLayout(FlowLayout.CENTER));
     JPanel hitPane = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -77,17 +77,17 @@ public class GUI extends JFrame implements ActionListener
         add(playPane, BorderLayout.CENTER);
         playPane.setPreferredSize(playDim);
         playPane.setMaximumSize(playDim);
-        playPane.add(textPane, BorderLayout.CENTER);
+        playPane.add(textPane, BorderLayout.CENTER);//One element placement within the BorderLayout
             textBox.setLineWrap(true);
             textBox.setWrapStyleWord(true);
             textBox.setEditable(false);
             textBox.setFocusable(false);
-        playPane.add(controlPane, BorderLayout.PAGE_END);
+        playPane.add(controlPane, BorderLayout.PAGE_END);//Another one
             controlPane.add(startButton);
             controlPane.add(nextButton);
 
         buildStatBar();
-        
+
         setLocationRelativeTo(getRootPane());
         newGame.addActionListener(this);
         saveGame.addActionListener(this);

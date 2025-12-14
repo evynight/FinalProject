@@ -1,3 +1,4 @@
+//Second child of Character class
 public class Monster extends Character
 {
     public static final int WEAK_MON = 0;

@@ -1,3 +1,4 @@
+//Parent class to Player and Mosnter classes
 public abstract class Character 
 {
     private String name;

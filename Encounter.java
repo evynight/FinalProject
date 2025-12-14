@@ -1,3 +1,4 @@
+//Interface implemented by Combat and Event classes
 public interface Encounter
 {
     public abstract void initiate();

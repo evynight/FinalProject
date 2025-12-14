@@ -1,3 +1,4 @@
+//First child class of Encounter interface
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
@@ -62,6 +63,7 @@ public class Combat extends JFrame
     Player player;
     Monster mon1;
     Monster mon2;
+    //Two Queues for working through turn order and displaying the actions of every Characters' turn
     Queue<Character> turn = new LinkedList<Character>();
     Queue<String> combatMsg = new LinkedList<String>();
 
@@ -72,6 +74,7 @@ public class Combat extends JFrame
         multiMon = false;
         selectMon = SEL_MON1;
     }
+    //Above and below are overloaded constructors
     public Combat(Player p, Monster m1, Monster m2)
     {
         player = p;
@@ -84,6 +87,7 @@ public class Combat extends JFrame
             mon2.setName(mon2.getName() + "(2)");
         }
     }
+    //Five overrideden methods here
     @Override
     public void initiate()
     {
