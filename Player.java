@@ -1,13 +1,9 @@
 public class Player extends Character
 {
     private int lvl;
-    private int EXP;
-    private int nextLvlExp;
+    private int expNxtLvl;
+    boolean goUp;
 
-    public Player()
-    {
-        super();
-    }
     public Player(String n)
     {
         super();
@@ -21,43 +17,41 @@ public class Player extends Character
     {
         return lvl;
     }
-    public void setExp(int e)
-    {
-        EXP = e;
-    }
-    public int getExp()
-    {
-        return EXP;
-    }
     public void setNxtLvl(int n)
     {
-        nextLvlExp = n;
+        expNxtLvl = n;
     }
     public int getNxtLvl()
     {
-        return nextLvlExp;
+        return expNxtLvl;
     }
-    public void lvlUp()
+    public void gainExp(int g)
     {
-        lvl++;
+        setExp(getExp() + g);
+    }
+    public boolean lvlUp()
+    {
+        if(getExp() >= getNxtLvl())
+        {
+            goUp = true;
+            lvl++;
+            setExp(getExp() - getNxtLvl());
+        }
+        else
+        {
+            goUp = false;
+        }
+        return goUp;
     }
     @Override
-    public void attack()
+    public int attack()
     {
         System.out.println(getName() + " attacks");
+        return getStr();
     }
     @Override
     public void useSpecial()
     {
         System.out.println(getName() + " uses special");
-    }
-    @Override
-    public void defeat()
-    {
-        System.out.println(getName() + " defeated");
-    }
-    public void flee()
-    {
-        System.out.println(getName() + " runs from battle");
     }
 }

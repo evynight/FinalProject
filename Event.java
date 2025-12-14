@@ -12,6 +12,11 @@ public class Event
         
     }
     @Override
+    public void prompt()
+    {
+        
+    }
+    @Override
     public void addTxt(String s)
     {
 

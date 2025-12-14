@@ -1,14 +1,11 @@
 public class Monster extends Character
 {
-    public static final int WEAK_MON = 1;
-    public static final int STRONG_MON = 2;
+    public static final int WEAK_MON = 0;
+    public static final int STRONG_MON = 1;
     private int activeMon;
     private String[] poolMon = {"(weak placeholder)",
                                 "(strong placeholder)"};
-    public Monster()
-    {
-        super();
-    }
+
     public Monster(int n)
     {
         super();
@@ -21,18 +18,14 @@ public class Monster extends Character
         super.setName(poolMon[activeMon]);
     }
     @Override
-    public void attack()
+    public int attack()
     {
         System.out.println(poolMon[activeMon] + " attacks");
+        return getStr();
     }
     @Override
     public void useSpecial()
     {
         System.out.println(poolMon[activeMon] + " uses special");
-    }
-    @Override
-    public void defeat()
-    {
-        System.out.println(poolMon[activeMon] + " defeated");
     }
 }

@@ -38,13 +38,21 @@ public class GUI extends JFrame implements ActionListener
     JPanel namePane = new JPanel(new FlowLayout(FlowLayout.CENTER));
     JPanel lvlPane = new JPanel(new FlowLayout(FlowLayout.CENTER));
     JPanel hitPane = new JPanel(new FlowLayout(FlowLayout.CENTER));
-    JLabel nameLabel = new JLabel("name");
-    JLabel lvlLabel = new JLabel("level");
+    JPanel strPane = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    JPanel expPane = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    JLabel nameLabel = new JLabel("-");
+    JLabel lvlLabel = new JLabel("-");
     JLabel hitLabel = new JLabel("-");
-    JLabel delimLabel = new JLabel(" / ");
+    JLabel hitDelim = new JLabel(" / ");
     JLabel maxHitLabel = new JLabel("-");
+    JLabel strLabel = new JLabel("-");
+    JLabel expLabel = new JLabel("-");
+    JLabel expDelim = new JLabel(" / ");
+    JLabel nxtExpLabel = new JLabel("-");
 
     Border blkBrdr = BorderFactory.createLineBorder(Color.black);
+
+    Player player;
 
     public GUI()
     {
@@ -95,16 +103,24 @@ public class GUI extends JFrame implements ActionListener
                 TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
         statPane.add(hitPane);
             hitPane.add(hitLabel);
-            hitPane.add(delimLabel);
+            hitPane.add(hitDelim);
             hitPane.add(maxHitLabel);
             hitPane.setPreferredSize(statDim);
             hitPane.setMaximumSize(statDim);
             hitPane.setBorder(BorderFactory.createTitledBorder(blkBrdr, "HP",
                 TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
+        statPane.add(strPane);
+            strPane.add(strLabel);
+            strPane.setBorder(BorderFactory.createTitledBorder(blkBrdr, "STR",
+                TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
+        statPane.add(expPane);
+            expPane.add(expLabel);
+            expPane.add(expDelim);
+            expPane.add(nxtExpLabel);
+            expPane.setBorder(BorderFactory.createTitledBorder(blkBrdr, "EXP",
+                TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
         
-        //pack();
-        setLocationRelativeTo(null);
-
+        setLocationRelativeTo(getRootPane());
         newGame.addActionListener(this);
         saveGame.addActionListener(this);
         loadGame.addActionListener(this);
@@ -122,6 +138,15 @@ public class GUI extends JFrame implements ActionListener
         if(source == newGame)
         {
             System.out.println("New Game clicked");
+            String newName = JOptionPane.showInputDialog(this, "Enter a name for your character", "Hero");
+            player = new Player(newName);
+            player.setLvl(1);
+            player.setMaxHP(20);
+            player.setHP(player.getMaxHP());
+            player.setStr(3);
+            player.setExp(0);
+            player.setNxtLvl(10);
+            updateStats();
         }
         if(source == saveGame)
         {
@@ -145,15 +170,45 @@ public class GUI extends JFrame implements ActionListener
         }
         if(source == startButton)
         {
+            final int TEST_HP1 = 6;
+            final int TEST_HP2 = 10;
+            final int TEST_STR1 = 3;
+            final int TEST_STR2 = 4;
+            final int TEST_EXP1 = 6;
             System.out.println("Start button pressed");
+            Monster mon1 = new Monster(Monster.WEAK_MON);
+            Monster mon2 = new Monster(Monster.WEAK_MON);
+            mon1.setMaxHP(TEST_HP1);
+            mon1.setHP(mon1.getMaxHP());
+            mon1.setStr(TEST_STR2);
+            mon1.setExp(TEST_EXP1);
+            mon2.setMaxHP(TEST_HP1);
+            mon2.setHP(mon1.getMaxHP());
+            mon2.setStr(TEST_STR2);
+            mon2.setExp(TEST_EXP1);
+            Combat combat = new Combat(player, mon1, mon2);
+            combat.initiate();
         }
         if(source == nextButton)
         {
             System.out.println("Next button pressed");
+            updateStats();
         }
+    }
+    public void updateStats()
+    {
+        nameLabel.setText(player.getName());
+        lvlLabel.setText(String.valueOf(player.getLvl()));
+        hitLabel.setText(String.valueOf(player.getHP()));
+        maxHitLabel.setText(String.valueOf(player.getMaxHP()));
+        strLabel.setText(String.valueOf(player.getStr()));
+        expLabel.setText(String.valueOf(player.getExp()));
+        nxtExpLabel.setText(String.valueOf(player.getNxtLvl()));
     }
     public static void addTxt(String s)
     {
         textBox.append(s + "\n");
+        textBox.getCaret().setDot(Integer.MAX_VALUE);
     }
+    
 }
