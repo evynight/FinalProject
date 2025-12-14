@@ -111,48 +111,8 @@ public class Combat extends JFrame
             controlPane.add(atkMon2);
                 atkMon2.setVisible(false);
 
-        add(statPane, BorderLayout.LINE_START);
-        statPane.setLayout(new BoxLayout(statPane, BoxLayout.Y_AXIS));
-        statPane.setBorder(BorderFactory.createTitledBorder(blkBrdr, "Stats"));
-        statPane.add(namePane);
-            namePane.add(nameLabel);
-            namePane.setPreferredSize(statDim);
-            namePane.setMaximumSize(statDim);
-            namePane.setBorder(BorderFactory.createTitledBorder(blkBrdr, "Player",
-                TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
-        statPane.add(lvlPane);
-            lvlPane.add(lvlLabel);
-            lvlPane.setPreferredSize(statDim);
-            lvlPane.setMaximumSize(statDim);
-            lvlPane.setBorder(BorderFactory.createTitledBorder(blkBrdr, "Level",
-                TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
-        statPane.add(hitPane);
-            hitPane.add(hitLabel);
-            hitPane.add(hitDelim);
-            hitPane.add(maxHitLabel);
-            hitPane.setPreferredSize(statDim);
-            hitPane.setMaximumSize(statDim);
-            hitPane.setBorder(BorderFactory.createTitledBorder(blkBrdr, "HP",
-                TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
-        statPane.add(strPane);
-            strPane.add(strLabel);
-            strPane.setBorder(BorderFactory.createTitledBorder(blkBrdr, "STR",
-                TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
-        statPane.add(expPane);
-            expPane.add(expLabel);
-            expPane.add(expDelim);
-            expPane.add(nxtExpLabel);
-            expPane.setBorder(BorderFactory.createTitledBorder(blkBrdr, "EXP",
-                TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
-
-        nameLabel.setText(player.getName());
-        lvlLabel.setText(String.valueOf(player.getLvl()));
-        hitLabel.setText(String.valueOf(player.getHP()));
-        maxHitLabel.setText(String.valueOf(player.getMaxHP()));
-        strLabel.setText(String.valueOf(player.getStr()));
-        expLabel.setText(String.valueOf(player.getExp()));
-        nxtExpLabel.setText(String.valueOf(player.getNxtLvl()));
-        
+        buildStatBar();
+        updateStats();
         
         setLocationRelativeTo(getRootPane());
         setVisible(true);
@@ -231,12 +191,7 @@ public class Combat extends JFrame
             if(!combatMsg.isEmpty())
             {
                 addTxt(combatMsg.poll());
-                lvlLabel.setText(String.valueOf(player.getLvl()));
-                hitLabel.setText(String.valueOf(player.getHP()));
-                maxHitLabel.setText(String.valueOf(player.getMaxHP()));
-                strLabel.setText(String.valueOf(player.getStr()));
-                expLabel.setText(String.valueOf(player.getExp()));
-                nxtExpLabel.setText(String.valueOf(player.getNxtLvl()));
+                updateStats();
             }
             else if(combatMsg.isEmpty() && end)
             {
@@ -429,4 +384,50 @@ public class Combat extends JFrame
         combatMsg.offer(player.getName() + "'s body crumples beneath them in a broken heap.");
         combatMsg.offer("Maybe they weren't meant to be an adventurer, after all...");
     }
-}
+        public void updateStats()
+    {
+        nameLabel.setText(player.getName());
+        lvlLabel.setText(String.valueOf(player.getLvl()));
+        hitLabel.setText(String.valueOf(player.getHP()));
+        maxHitLabel.setText(String.valueOf(player.getMaxHP()));
+        strLabel.setText(String.valueOf(player.getStr()));
+        expLabel.setText(String.valueOf(player.getExp()));
+        nxtExpLabel.setText(String.valueOf(player.getNxtLvl()));
+    }
+    public void buildStatBar()
+    {
+        add(statPane, BorderLayout.LINE_START);
+        statPane.setLayout(new BoxLayout(statPane, BoxLayout.Y_AXIS));
+        statPane.setBorder(BorderFactory.createTitledBorder(blkBrdr, "Stats"));
+        statPane.add(namePane);
+            namePane.add(nameLabel);
+            namePane.setPreferredSize(statDim);
+            namePane.setMaximumSize(statDim);
+            namePane.setBorder(BorderFactory.createTitledBorder(blkBrdr, "Player",
+                TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
+        statPane.add(lvlPane);
+            lvlPane.add(lvlLabel);
+            lvlPane.setPreferredSize(statDim);
+            lvlPane.setMaximumSize(statDim);
+            lvlPane.setBorder(BorderFactory.createTitledBorder(blkBrdr, "Level",
+                TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
+        statPane.add(hitPane);
+            hitPane.add(hitLabel);
+            hitPane.add(hitDelim);
+            hitPane.add(maxHitLabel);
+            hitPane.setPreferredSize(statDim);
+            hitPane.setMaximumSize(statDim);
+            hitPane.setBorder(BorderFactory.createTitledBorder(blkBrdr, "HP",
+                TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
+        statPane.add(strPane);
+            strPane.add(strLabel);
+            strPane.setBorder(BorderFactory.createTitledBorder(blkBrdr, "STR",
+                TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
+        statPane.add(expPane);
+            expPane.add(expLabel);
+            expPane.add(expDelim);
+            expPane.add(nxtExpLabel);
+            expPane.setBorder(BorderFactory.createTitledBorder(blkBrdr, "EXP",
+                TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
+        }
+    }

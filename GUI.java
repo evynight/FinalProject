@@ -86,39 +86,7 @@ public class GUI extends JFrame implements ActionListener
             controlPane.add(startButton);
             controlPane.add(nextButton);
 
-        add(statPane, BorderLayout.LINE_START);
-        statPane.setLayout(new BoxLayout(statPane, BoxLayout.Y_AXIS));
-        statPane.setBorder(BorderFactory.createTitledBorder(blkBrdr, "Stats"));
-        statPane.add(namePane);
-            namePane.add(nameLabel);
-            namePane.setPreferredSize(statDim);
-            namePane.setMaximumSize(statDim);
-            namePane.setBorder(BorderFactory.createTitledBorder(blkBrdr, "Player",
-                TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
-        statPane.add(lvlPane);
-            lvlPane.add(lvlLabel);
-            lvlPane.setPreferredSize(statDim);
-            lvlPane.setMaximumSize(statDim);
-            lvlPane.setBorder(BorderFactory.createTitledBorder(blkBrdr, "Level",
-                TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
-        statPane.add(hitPane);
-            hitPane.add(hitLabel);
-            hitPane.add(hitDelim);
-            hitPane.add(maxHitLabel);
-            hitPane.setPreferredSize(statDim);
-            hitPane.setMaximumSize(statDim);
-            hitPane.setBorder(BorderFactory.createTitledBorder(blkBrdr, "HP",
-                TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
-        statPane.add(strPane);
-            strPane.add(strLabel);
-            strPane.setBorder(BorderFactory.createTitledBorder(blkBrdr, "STR",
-                TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
-        statPane.add(expPane);
-            expPane.add(expLabel);
-            expPane.add(expDelim);
-            expPane.add(nxtExpLabel);
-            expPane.setBorder(BorderFactory.createTitledBorder(blkBrdr, "EXP",
-                TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
+        buildStatBar();
         
         setLocationRelativeTo(getRootPane());
         newGame.addActionListener(this);
@@ -210,5 +178,40 @@ public class GUI extends JFrame implements ActionListener
         textBox.append(s + "\n");
         textBox.getCaret().setDot(Integer.MAX_VALUE);
     }
-    
+    public void buildStatBar()
+    {
+        add(statPane, BorderLayout.LINE_START);
+        statPane.setLayout(new BoxLayout(statPane, BoxLayout.Y_AXIS));
+        statPane.setBorder(BorderFactory.createTitledBorder(blkBrdr, "Stats"));
+        statPane.add(namePane);
+            namePane.add(nameLabel);
+            namePane.setPreferredSize(statDim);
+            namePane.setMaximumSize(statDim);
+            namePane.setBorder(BorderFactory.createTitledBorder(blkBrdr, "Player",
+                TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
+        statPane.add(lvlPane);
+            lvlPane.add(lvlLabel);
+            lvlPane.setPreferredSize(statDim);
+            lvlPane.setMaximumSize(statDim);
+            lvlPane.setBorder(BorderFactory.createTitledBorder(blkBrdr, "Level",
+                TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
+        statPane.add(hitPane);
+            hitPane.add(hitLabel);
+            hitPane.add(hitDelim);
+            hitPane.add(maxHitLabel);
+            hitPane.setPreferredSize(statDim);
+            hitPane.setMaximumSize(statDim);
+            hitPane.setBorder(BorderFactory.createTitledBorder(blkBrdr, "HP",
+                TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
+        statPane.add(strPane);
+            strPane.add(strLabel);
+            strPane.setBorder(BorderFactory.createTitledBorder(blkBrdr, "STR",
+                TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
+        statPane.add(expPane);
+            expPane.add(expLabel);
+            expPane.add(expDelim);
+            expPane.add(nxtExpLabel);
+            expPane.setBorder(BorderFactory.createTitledBorder(blkBrdr, "EXP",
+                TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
+    }
 }
