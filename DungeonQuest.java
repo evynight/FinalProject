@@ -15,7 +15,7 @@ public class DungeonQuest
     *   x - Min custom exception that throws exception
     *   x - Read/write data from file
     *   o - Uses Layout Manager
-    *   x - Min 3 dif Swing elements (JButton, JLabel, JOPtion Pane, JTextField, Tool Tips, JCombo Box, Scroll Panes, etc)
+    *   o - Min 3 dif Swing elements (JButton, JLabel, JOPtion Pane, JTextField, Tool Tips, JCombo Box, Scroll Panes, etc)
     *   x - One of following: Images, Animation, Audio
     *   o - One of following: Multithreading, Networking, Linked Lists, Stacks, Queues, Trees
      */

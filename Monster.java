@@ -46,25 +46,25 @@ public class Monster extends Character implements MonType
     }
     public Monster randMon()
     {
-        randNum = random.nextInt(TOTAL_MONS);
+        randNum = random.nextInt(TOTAL_MON);
         Monster randMon = new Monster(randNum);
         return randMon;
     }
     public Monster randWeakMon()
     {
-        randNum = random.nextInt(WEAK_MONS);
+        randNum = random.nextInt(WEAK_MON);
         Monster weakMon = new Monster(randNum);
         return weakMon;
     }
     public Monster randMidMon()
     {
-        randNum = random.nextInt(MID_MONS);
+        randNum = random.nextInt(MID_MON);
         Monster midMon = new Monster(randNum);
         return midMon;
     }
     public Monster randStrongMon()
     {
-        randNum = random.nextInt(MID_MONS);
+        randNum = random.nextInt(MID_MON);
         Monster strongMon = new Monster(randNum);
         return strongMon;
     }
