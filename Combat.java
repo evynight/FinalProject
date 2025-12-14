@@ -304,7 +304,7 @@ public class Combat extends JFrame
                         if(mon1.downed())
                         {
                             combatMsg.offer(mon1.getName() + " was slain!");
-                            earnedExp = earnedExp +  mon1.getExp();
+                            earnedExp = earnedExp +  mon1.giveExp();
                             if(mon2.downed())
                             {
                                 endRound();

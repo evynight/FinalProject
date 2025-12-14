@@ -1,9 +1,11 @@
 //First child of Character class
+import java.util.Random;
 public class Player extends Character
 {
     private int lvl;
     private int expNxtLvl;
     boolean goUp;
+    Random random = new Random();
 
     public Player(String n)
     {
@@ -34,9 +36,13 @@ public class Player extends Character
     {
         if(getExp() >= getNxtLvl())
         {
+            while(getExp() >= getNxtLvl())
+            {               
+                setExp(getExp() - getNxtLvl());
+                nxtLvlUp();
+                lvl++;
+            }
             goUp = true;
-            lvl++;
-            setExp(getExp() - getNxtLvl());
         }
         else
         {
@@ -44,11 +50,18 @@ public class Player extends Character
         }
         return goUp;
     }
+    public void nxtLvlUp()
+    {
+        int newGoalExp = (int)Math.round(getNxtLvl() / ((getLvl() -1) / getLvl()));
+        expNxtLvl = newGoalExp;
+    }
     @Override
     public int attack()
     {
         System.out.println(getName() + " attacks");
-        return getStr();
+        int minDmg = (int)Math.round(getStr() + 1.15);
+        int maxDmg = (int)Math.round(getStr() + 1.30);
+        return random.nextInt(minDmg, maxDmg);
     }
     @Override
     public void useSpecial()

@@ -138,22 +138,11 @@ public class GUI extends JFrame implements ActionListener
         }
         if(source == startButton)
         {
-            final int TEST_HP1 = 6;
-            final int TEST_HP2 = 10;
-            final int TEST_STR1 = 3;
-            final int TEST_STR2 = 4;
-            final int TEST_EXP1 = 6;
+            
             System.out.println("Start button pressed");
             Monster mon1 = new Monster(Monster.WEAK_MON);
             Monster mon2 = new Monster(Monster.WEAK_MON);
-            mon1.setMaxHP(TEST_HP1);
-            mon1.setHP(mon1.getMaxHP());
-            mon1.setStr(TEST_STR2);
-            mon1.setExp(TEST_EXP1);
-            mon2.setMaxHP(TEST_HP1);
-            mon2.setHP(mon1.getMaxHP());
-            mon2.setStr(TEST_STR2);
-            mon2.setExp(TEST_EXP1);
+            
             Combat combat = new Combat(player, mon1, mon2);
             combat.initiate();
         }
